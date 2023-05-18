@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   builder: (context) {
                     return AlertDialog(
                       title: const Text("Logout"),
-                      content: const Text("Are you sure to want Logout"),
+                      content: const Text("Are you sure you want to logout?"),
                       actions: [
                         IconButton(
                           onPressed: () {
@@ -101,13 +101,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             Icons.done,
                             color: Colors.green,
                           ),
-                        )
+                        ),
                       ],
                     );
                   });
-              authService.signOut().whenComplete(() {
-                nextScreen(context, const LoginPage());
-              });
             },
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
