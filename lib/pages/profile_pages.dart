@@ -22,7 +22,6 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
-        centerTitle: true,
         title: const Text(
           "Profile",
           style: TextStyle(
@@ -38,14 +37,20 @@ class _ProfilePageState extends State<ProfilePage> {
             size: 150,
             color: Colors.grey[700],
           ),
-          const SizedBox(height: 15),
+          const SizedBox(
+            height: 15,
+          ),
           Text(
             widget.userName,
             textAlign: TextAlign.center,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 30),
-          const Divider(height: 2),
+          const SizedBox(
+            height: 30,
+          ),
+          const Divider(
+            height: 2,
+          ),
           ListTile(
             onTap: () {
               nextScreen(context, const HomePage());
@@ -126,7 +131,9 @@ class _ProfilePageState extends State<ProfilePage> {
               size: 200,
               color: Colors.grey[700],
             ),
-            const SizedBox(height: 15),
+            const SizedBox(
+              height: 15,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

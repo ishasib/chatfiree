@@ -1,13 +1,14 @@
+import 'package:chatt_fireee/constants.dart';
 import 'package:chatt_fireee/helper/helper_function.dart';
-import 'package:chatt_fireee/pages/home_page.dart';
 import 'package:chatt_fireee/pages/auth/login_page.dart';
+import 'package:chatt_fireee/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: FirebaseOptions(

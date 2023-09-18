@@ -1,15 +1,9 @@
+import 'package:chatt_fireee/group_info.dart';
+import 'package:chatt_fireee/messege_tile.dart';
 import 'package:chatt_fireee/service/database_service.dart';
 import 'package:chatt_fireee/widgets/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-
-import '../group_info.dart';
-import '../messege_tile.dart';
-import '../service/database_service.dart';
-import '../widgets/widgets.dart';
 
 class ChatPage extends StatefulWidget {
   final String groupId;

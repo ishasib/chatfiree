@@ -4,11 +4,10 @@ import 'package:chatt_fireee/pages/profile_pages.dart';
 import 'package:chatt_fireee/search_page.dart';
 import 'package:chatt_fireee/service/auth_service.dart';
 import 'package:chatt_fireee/service/database_service.dart';
+import 'package:chatt_fireee/widgets/group_tile.dart';
 import 'package:chatt_fireee/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/group_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     gettingUserData();
   }
 
-  //string manipulation
+  // string manipulation
   String getId(String res) {
     return res.substring(0, res.indexOf("_"));
   }
@@ -51,7 +50,7 @@ class _HomePageState extends State<HomePage> {
         userName = val!;
       });
     });
-    //getting the list of snapshots in stream
+    // getting the list of snapshots in our stream
     await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
         .getUserGroups()
         .then((snapshot) {
@@ -65,21 +64,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          actions: [
-            IconButton(
-                onPressed: () {
-                  nextScreen(context, const SearchPage());
-                },
-                icon: const Icon(Icons.search))
-          ],
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Theme.of(context).primaryColor,
-          title: const Text(
-            "Groups",
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 27),
-          )),
+        actions: [
+          IconButton(
+              onPressed: () {
+                nextScreen(context, const SearchPage());
+              },
+              icon: const Icon(
+                Icons.search,
+              ))
+        ],
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text(
+          "Groups",
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 27),
+        ),
+      ),
       drawer: Drawer(
           child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 50),
@@ -89,14 +91,20 @@ class _HomePageState extends State<HomePage> {
             size: 150,
             color: Colors.grey[700],
           ),
-          const SizedBox(height: 15),
+          const SizedBox(
+            height: 15,
+          ),
           Text(
             userName,
             textAlign: TextAlign.center,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 30),
-          const Divider(height: 2),
+          const SizedBox(
+            height: 30,
+          ),
+          const Divider(
+            height: 2,
+          ),
           ListTile(
             onTap: () {},
             selectedColor: Theme.of(context).primaryColor,
@@ -134,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                   builder: (context) {
                     return AlertDialog(
                       title: const Text("Logout"),
-                      content: const Text("Are you sure to want Logout"),
+                      content: const Text("Are you sure you want to logout?"),
                       actions: [
                         IconButton(
                           onPressed: () {
@@ -157,13 +165,10 @@ class _HomePageState extends State<HomePage> {
                             Icons.done,
                             color: Colors.green,
                           ),
-                        )
+                        ),
                       ],
                     );
                   });
-              authService.signOut().whenComplete(() {
-                nextScreen(context, const LoginPage());
-              });
             },
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -216,23 +221,20 @@ class _HomePageState extends State<HomePage> {
                               groupName = val;
                             });
                           },
-                          style: const TextStyle(color: Colors.red),
+                          style: const TextStyle(color: Colors.black),
                           decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Theme.of(context).primaryColor),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).primaryColor),
+                                  borderRadius: BorderRadius.circular(20)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.red),
+                                  borderRadius: BorderRadius.circular(20)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).primaryColor),
+                                  borderRadius: BorderRadius.circular(20))),
                         ),
                 ],
               ),
@@ -242,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor),
+                      primary: Theme.of(context).primaryColor),
                   child: const Text("CANCEL"),
                 ),
                 ElevatedButton(
@@ -259,14 +261,14 @@ class _HomePageState extends State<HomePage> {
                         _isLoading = false;
                       });
                       Navigator.of(context).pop();
-                      showSnackBar(
-                          context, Colors.green, "Group created successful");
+                      showSnackbar(
+                          context, Colors.green, "Group created successfully.");
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor),
+                      primary: Theme.of(context).primaryColor),
                   child: const Text("CREATE"),
-                ),
+                )
               ],
             );
           }));
@@ -277,7 +279,7 @@ class _HomePageState extends State<HomePage> {
     return StreamBuilder(
       stream: groups,
       builder: (context, AsyncSnapshot snapshot) {
-        //make some checks
+        // make some checks
         if (snapshot.hasData) {
           if (snapshot.data['groups'] != null) {
             if (snapshot.data['groups'].length != 0) {
@@ -288,7 +290,7 @@ class _HomePageState extends State<HomePage> {
                   return GroupTile(
                       groupId: getId(snapshot.data['groups'][reverseIndex]),
                       groupName: getName(snapshot.data['groups'][reverseIndex]),
-                      UserName: snapshot.data['fullName']);
+                      userName: snapshot.data['fullName']);
                 },
               );
             } else {
@@ -300,8 +302,7 @@ class _HomePageState extends State<HomePage> {
         } else {
           return Center(
             child: CircularProgressIndicator(
-              color: Theme.of(context).primaryColor,
-            ),
+                color: Theme.of(context).primaryColor),
           );
         }
       },
@@ -329,8 +330,9 @@ class _HomePageState extends State<HomePage> {
             height: 20,
           ),
           const Text(
-              " You are not join any group,tap on the add button to join the group and search the group from search icon.",
-              textAlign: TextAlign.center),
+            "You've not joined any groups, tap on the add icon to create a group or also search from top search button.",
+            textAlign: TextAlign.center,
+          )
         ],
       ),
     );

@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  //login
+  // login
   Future loginWithUserNameandPassword(String email, String password) async {
     try {
       User user = (await firebaseAuth.signInWithEmailAndPassword(
@@ -13,8 +13,6 @@ class AuthService {
           .user!;
 
       if (user != null) {
-        //call our database service to update the user data.
-
         return true;
       }
     } on FirebaseAuthException catch (e) {
@@ -22,7 +20,7 @@ class AuthService {
     }
   }
 
-  //register
+  // register
   Future registerUserWithEmailandPassword(
       String fullName, String email, String password) async {
     try {
@@ -31,7 +29,7 @@ class AuthService {
           .user!;
 
       if (user != null) {
-        //call our database service to update the user data.
+        // call our database service to update the user data.
         await DatabaseService(uid: user.uid).savingUserData(fullName, email);
         return true;
       }
@@ -40,7 +38,7 @@ class AuthService {
     }
   }
 
-  //singnout
+  // signout
   Future signOut() async {
     try {
       await HelperFunctions.saveUserLoggedInStatus(false);

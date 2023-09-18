@@ -1,18 +1,16 @@
+import 'package:chatt_fireee/pages/chat_page.dart';
 import 'package:chatt_fireee/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/chat_page.dart';
-
 class GroupTile extends StatefulWidget {
-  final String UserName;
+  final String userName;
   final String groupId;
   final String groupName;
-
   const GroupTile(
       {Key? key,
       required this.groupId,
       required this.groupName,
-      required this.UserName})
+      required this.userName})
       : super(key: key);
 
   @override
@@ -29,7 +27,7 @@ class _GroupTileState extends State<GroupTile> {
             ChatPage(
               groupId: widget.groupId,
               groupName: widget.groupName,
-              userName: widget.UserName,
+              userName: widget.userName,
             ));
       },
       child: Container(
@@ -50,7 +48,7 @@ class _GroupTileState extends State<GroupTile> {
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           subtitle: Text(
-            "join the conversation as ${widget.UserName}",
+            "Join the conversation as ${widget.userName}",
             style: const TextStyle(fontSize: 13),
           ),
         ),
